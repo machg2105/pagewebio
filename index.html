@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Carga de página web en iframe</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+    
+    .container {
+      background-color: white;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    
+    input[type=text] {
+      width: 60%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background-color: #45a049;
+    }
+    
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Carga de página web en iframe</h1>
+    <input type="text" id="url-input" placeholder="Ingresa la URL de la página web">
+    <button onclick="loadPage()">Iniciar</button>
+    <button onclick="clearInput()">Limpiar</button>
+    <iframe id="my-iframe" sandbox="allow-same-origin allow-scripts"></iframe>
+  </div>
+
+  <script>
+    function loadPage() {
+      var urlInput = document.getElementById("url-input");
+      var iframe = document.getElementById("my-iframe");
+      iframe.src = urlInput.value;
+    }
+
+    function clearInput() {
+      document.getElementById("url-input").value = "";
+    }
+  </script>
+</body>
+</html>
