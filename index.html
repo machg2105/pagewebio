@@ -3,405 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Control Financiero</title>
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --success-color: #2ecc71;
-            --warning-color: #e74c3c;
-            --light-gray: #ecf0f1;
-            --white: #ffffff;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: var(--white);
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            text-align: center;
-            color: var(--primary-color);
-            margin-bottom: 30px;
-            font-size: 2.5em;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-bottom: 3px solid var(--secondary-color);
-            padding-bottom: 10px;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .section {
-            background-color: var(--light-gray);
-            padding: 20px;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .section:hover {
-            transform: translateY(-5px);
-        }
-
-        h2 {
-            color: var(--secondary-color);
-            margin-bottom: 20px;
-            font-size: 1.5em;
-            border-left: 4px solid var(--secondary-color);
-            padding-left: 10px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--primary-color);
-            font-weight: 500;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
-        }
-
-        .required::after {
-            content: " *";
-            color: var(--warning-color);
-        }
-
-        button {
-            width: 100%;
-            padding: 15px;
-            background-color: var(--secondary-color);
-            color: var(--white);
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 20px;
-        }
-
-        button:hover {
-            background-color: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .result {
-            margin-top: 30px;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: var(--light-gray);
-            display: none;
-        }
-
-        .result h3 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .result p {
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: var(--white);
-        }
-
-        .status-message {
-            text-align: center;
-            font-size: 1.2em;
-            font-weight: bold;
-            padding: 15px;
-            margin-top: 15px;
-            border-radius: 8px;
-        }
-
-        .status-surplus {
-            background-color: rgba(46, 204, 113, 0.2);
-            color: #27ae60;
-        }
-
-        .status-deficit {
-            background-color: rgba(231, 76, 60, 0.2);
-            color: #c0392b;
-        }
-
-        .status-balanced {
-            background-color: rgba(52, 152, 219, 0.2);
-            color: #2980b9;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            .grid-container {
-                grid-template-columns: 1fr;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
-        }
-    </style>
+    <title>Gestión de Ingresos</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Sistema de Control Financiero</h1>
+    <div id="app">
+        <h1>Gestión de Ingresos</h1>
         
-        <div class="grid-container">
-            <!-- Sección de Ingresos -->
-            <div class="section">
-                <h2>Ingresos</h2>
-                <div class="form-group">
-                    <label class="required">Caja Inicial:</label>
-                    <input type="number" id="cajaInicial" step="0.01" required>
-                </div>
-                
-                <div class="form-group">
-                    <h3>Efectivo Recibido:</h3>
-                    <div class="form-group">
-                        <label>Persona 1:</label>
-                        <input type="number" id="efectivo1" step="0.01">
-                    </div>
-                    <div class="form-group">
-                        <label>Persona 2:</label>
-                        <input type="number" id="efectivo2" step="0.01">
-                    </div>
-                    <div class="form-group">
-                        <label>Persona 3:</label>
-                        <input type="number" id="efectivo3" step="0.01">
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Full:</label>
-                    <input type="number" id="full" step="0.01">
-                </div>
-                
-                <div class="form-group">
-                    <label>B Pichincha:</label>
-                    <input type="number" id="bPichinchaIngreso" step="0.01">
-                </div>
-                
-                <div class="form-group">
-                    <label>B Guayaquil A:</label>
-                    <input type="number" id="bGuayaquilAIngreso" step="0.01">
-                </div>
-                
-                <div class="form-group">
-                    <label>B Guayaquil R:</label>
-                    <input type="number" id="bGuayaquilRIngreso" step="0.01">
-                </div>
-            </div>
-
-            <!-- Sección de Egresos -->
-            <div class="section">
-                <h2>Egresos</h2>
-                <div class="form-group">
-                    <label>B Pichincha:</label>
-                    <input type="number" id="bPichinchaEgreso" step="0.01">
-                </div>
-                
-                <div class="form-group">
-                    <label>B Guayaquil A:</label>
-                    <input type="number" id="bGuayaquilAEgreso" step="0.01">
-                </div>
-                
-                <div class="form-group">
-                    <label>B Guayaquil R:</label>
-                    <input type="number" id="bGuayaquilREgreso" step="0.01">
-                </div>
-                
-                <div class="form-group">
-                    <label class="required">Entregas:</label>
-                    <input type="number" id="entregas" step="0.01" required>
-                </div>
-            </div>
-
-            <!-- Sección de Comisión y Efectivo -->
-            <div class="section">
-                <h2>Comisión</h2>
-                <div class="form-group">
-                    <label class="required">Comisión Full:</label>
-                    <input type="number" id="comisionFull" step="0.01" required>
-                </div>
-
-                <h2>Efectivo en Caja Final</h2>
-                <div class="form-group">
-                    <label>Billetes de $5:</label>
-                    <input type="number" id="billetes5" step="1">
-                </div>
-                
-                <div class="form-group">
-                    <label>Monedas de $1:</label>
-                    <input type="number" id="monedas1" step="1">
-                </div>
-                
-                <div class="form-group">
-                    <label>Monedas de $0.50:</label>
-                    <input type="number" id="monedas50" step="1">
-                </div>
-                
-                <div class="form-group">
-                    <label>Monedas de $0.25:</label>
-                    <input type="number" id="monedas25" step="1">
-                </div>
-                
-                <div class="form-group">
-                    <label>Monedas de $0.10:</label>
-                    <input type="number" id="monedas10" step="1">
-                </div>
-                
-                <div class="form-group">
-                    <label>Monedas de $0.05:</label>
-                    <input type="number" id="monedas5" step="1">
-                </div>
-                
-                <div class="form-group">
-                    <label>Monedas de $0.01:</label>
-                    <input type="number" id="monedas1c" step="1">
-                </div>
-            </div>
+        <div id="input-section">
+            <h2>Registro Diario</h2>
+            <form id="daily-form">
+                <input type="date" id="date" required>
+                <input type="time" id="start-time" required>
+                <input type="time" id="end-time" required>
+                <input type="number" id="discounts" placeholder="Descuentos" step="0.01">
+                <input type="number" id="extras" placeholder="Extras" step="0.01">
+                <button type="submit">Agregar Registro</button>
+            </form>
         </div>
 
-        <button onclick="calcular()">Calcular Balance</button>
+        <div id="weekly-summary">
+            <h2>Resumen Semanal</h2>
+            <div id="week-navigation">
+                <button id="prev-week">Semana Anterior</button>
+                <span id="current-week"></span>
+                <button id="next-week">Semana Siguiente</button>
+            </div>
+            <div id="summary-data"></div>
+        </div>
 
-        <div class="result" id="resultado"></div>
+        <div id="records-table">
+            <h2>Registros</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Día</th>
+                        <th>HE</th>
+                        <th>HS</th>
+                        <th>Ganancia</th>
+                        <th>Descuentos</th>
+                        <th>Extras</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="records-body"></tbody>
+            </table>
+        </div>
+
+        <div id="charts">
+            <h2>Gráficos</h2>
+            <canvas id="weekly-earnings-chart"></canvas>
+            <canvas id="discounts-extras-chart"></canvas>
+        </div>
     </div>
 
-    <script>
-        function getNumericValue(id) {
-            return parseFloat(document.getElementById(id).value) || 0;
-        }
-
-        function formatCurrency(value) {
-            return new Intl.NumberFormat('es-EC', {
-                style: 'currency',
-                currency: 'USD'
-            }).format(value);
-        }
-
-        function calcular() {
-            // Validar campos obligatorios
-            if (!document.getElementById('cajaInicial').value ||
-                !document.getElementById('entregas').value ||
-                !document.getElementById('comisionFull').value) {
-                alert('Por favor, complete todos los campos obligatorios (marcados con *)');
-                return;
-            }
-
-            // Calcular ingresos
-            const ingresos = 
-                getNumericValue('cajaInicial') +
-                getNumericValue('efectivo1') +
-                getNumericValue('efectivo2') +
-                getNumericValue('efectivo3') +
-                getNumericValue('full') +
-                getNumericValue('bPichinchaIngreso') +
-                getNumericValue('bGuayaquilAIngreso') +
-                getNumericValue('bGuayaquilRIngreso');
-
-            // Calcular egresos
-            const egresos =
-                getNumericValue('bPichinchaEgreso') +
-                getNumericValue('bGuayaquilAEgreso') +
-                getNumericValue('bGuayaquilREgreso') +
-                getNumericValue('entregas');
-
-            // Calcular diferencia y sumar comisión
-            const diferencia = ingresos - egresos;
-            const comision = getNumericValue('comisionFull');
-            const resultadoConComision = diferencia + comision;
-
-            // Calcular efectivo en caja
-            const efectivoCaja = 
-                (getNumericValue('billetes5') * 5) +
-                (getNumericValue('monedas1') * 1) +
-                (getNumericValue('monedas50') * 0.5) +
-                (getNumericValue('monedas25') * 0.25) +
-                (getNumericValue('monedas10') * 0.1) +
-                (getNumericValue('monedas5') * 0.05) +
-                (getNumericValue('monedas1c') * 0.01);
-
-            // Calcular diferencia final
-            const diferenciaFinal = efectivoCaja - resultadoConComision;
-
-            // Determinar el estado del balance
-            let statusMessage = '';
-            let statusClass = '';
-            
-            if (Math.abs(diferenciaFinal) < 0.01) {
-                statusMessage = '✅ El balance está cuadrado correctamente';
-                statusClass = 'status-balanced';
-            } else if (diferenciaFinal > 0) {
-                statusMessage = `💰 Hay un sobrante de ${formatCurrency(diferenciaFinal)}`;
-                statusClass = 'status-surplus';
-            } else {
-                statusMessage = `⚠️ Hay un faltante de ${formatCurrency(Math.abs(diferenciaFinal))}`;
-                statusClass = 'status-deficit';
-            }
-
-            // Mostrar resultados
-            const resultadoDiv = document.getElementById('resultado');
-            resultadoDiv.style.display = 'block';
-            resultadoDiv.innerHTML = `
-                <h3>Resultados del Balance</h3>
-                <p><strong>Total Ingresos:</strong> ${formatCurrency(ingresos)}</p>
-                <p><strong>Total Egresos:</strong> ${formatCurrency(egresos)}</p>
-                <p><strong>Diferencia:</strong> ${formatCurrency(diferencia)}</p>
-                <p><strong>Resultado con Comisión:</strong> ${formatCurrency(resultadoConComision)}</p>
-                <p><strong>Efectivo en Caja:</strong> ${formatCurrency(efectivoCaja)}</p>
-                <div class="status-message ${statusClass}">
-                    ${statusMessage}
-                </div>
-            `;
-
-            // Hacer scroll suave hasta los resultados
-            resultadoDiv.scrollIntoView({ behavior: 'smooth' });
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
 </body>
-  </html>
+</html>
